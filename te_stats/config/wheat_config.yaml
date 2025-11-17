@@ -1,0 +1,121 @@
+# Wheat TE Statistics Configuration
+# Optimized configuration for wheat transposable element analysis
+
+# Wheat-specific Classification System
+classification:
+  # Level 1 classification optimized for wheat
+  level1:
+    "Class I": ["LTR", "LINE", "SINE", "DIRS"]
+    "Class II": ["TIR", "Helitron", "Maverick", "DNA"]
+    "Other": ["Unspecified", "Unknown", "Satellite"]
+
+  # Wheat-specific TE family mappings
+  wheat_families:
+    # LTR retrotransposons (dominant in wheat)
+    "RLC": "Class I/LTR/Copia"
+    "RLG": "Class I/LTR/Gypsy"
+    "RLE": "Class I/LTR/Other"
+    "RLX": "Class I/LTR/Unspecified"
+
+    # LINE retrotransposons
+    "RIL": "Class I/LINE/L1"
+    "RIX": "Class I/LINE/Other"
+
+    # DNA transposons
+    "DTA": "Class II/DNA/hAT"
+    "DTC": "Class II/DNA/CACTA"
+    "DTM": "Class II/DNA/MULE"
+    "DTP": "Class II/DNA/PIF-harbinger"
+    "DTT": "Class II/DNA/Tc1-Mariner"
+    "DTH": "Class II/DNA/Helitron"
+    "DTX": "Class II/DNA/Other"
+
+# Wheat Genome Parameters
+analysis:
+  # Wheat genome size estimates
+  genome_size: 16000000000        # 16 Gb for hexaploid wheat
+
+  # Filtering optimized for wheat
+  min_length: 100                  # Longer TEs are more reliable in wheat
+  exclude_unspecified: true        # Focus on classified TEs
+
+  # Interval merging
+  merge_overlaps: true
+  bedtools_path: "bedtools"
+
+# Output Configuration for Wheat Analysis
+output:
+  formats: ["csv", "excel"]
+  create_plots: true
+  plot_types: ["pie", "bar", "dashboard", "chromosome"]
+
+# Wheat-specific Visualization Settings
+visualization:
+  style: "seaborn-v0_8"
+  dpi: 300
+  figure_formats: ["png", "svg", "pdf"]
+
+  # Custom colors for wheat TE classes
+  colors:
+    level1:
+      "Class I": "#2E8B57"      # Sea green (retrotransposons)
+      "Class II": "#DC143C"      # Crimson (DNA transposons)
+      "Other": "#4682B4"        # Steel blue
+
+# Wheat Chromosome Configuration
+chromosomes:
+  # Wheat chromosome naming convention
+  naming_scheme: "group"          # "group" (1A, 1B, 1D) or "full" (chr1A, chr1B, chr1D)
+
+  # Subgenome information
+  subgenomes:
+    A: ["1A", "2A", "3A", "4A", "5A", "6A", "7A"]
+    B: ["1B", "2B", "3B", "4B", "5B", "6B", "7B"]
+    D: ["1D", "2D", "3D", "4D", "5D", "6D", "7D"]
+
+# Performance Optimization for Large Wheat Genome
+performance:
+  chunk_size: 50000               # Larger chunks for wheat genome
+  optimize_memory: true
+  parallel_processing: false      # Disable until implemented
+
+# Advanced Wheat Analysis Settings
+advanced:
+  # Wheat-specific exclude patterns
+  exclude_patterns:
+    - "Satellite"
+    - "Simple_repeat"
+    - "rRNA"
+    - "snRNA"
+    - "tRNA"
+
+  # Known problematic TE types in wheat annotations
+  problematic_types:
+    - "Low_complexity"
+    - "Dust"
+
+  # Custom TE classification rules for wheat
+  custom_rules:
+    # Repbase-specific classifications
+    "Angela": "Class I/LTR/Gypsy"
+    "Babar": "Class I/LTR/Copia"
+    "Fatima": "Class I/LTR/Gypsy"
+    "Huck": "Class I/LTR/Gypsy"
+    "Jordan": "Class I/LTR/Gypsy"
+    "Wilma": "Class I/LTR/Gypsy"
+
+# Reporting Configuration
+reporting:
+  # Include wheat-specific metrics
+  include_subgenome_analysis: true
+  include_chromosome_pair_analysis: true
+
+  # Custom report sections
+  sections:
+    - "executive_summary"
+    - "genome_wide_statistics"
+    - "chromosome_distribution"
+    - "subgenome_comparison"
+    - "te_family_analysis"
+    - "length_distribution"
+    - "visualization_summary"

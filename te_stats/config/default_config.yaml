@@ -1,0 +1,114 @@
+# TE Statistics Configuration File
+# This file contains configuration options for the TE analysis pipeline
+
+# Classification System Configuration
+classification:
+  # Level 1 classification (major classes)
+  level1:
+    "Class I": ["LTR", "LINE", "SINE", "DIRS"]
+    "Class II": ["TIR", "Helitron", "Maverick", "DNA"]
+    "Other": ["Unspecified", "Unknown"]
+
+  # Custom classification rules (optional)
+  # This section allows you to override default classification
+  custom_rules:
+    # Example: Re-classify specific patterns
+    # "ATREP18": "Class II/DNA/TIR/CACTA"
+
+# Analysis Parameters
+analysis:
+  # Interval merging using bedtools
+  merge_overlaps: true
+  bedtools_path: "bedtools"
+
+  # Filtering options
+  min_length: 50                    # Minimum TE length to include
+  exclude_unspecified: false        # Exclude Unspecified/Unknown TEs
+
+  # Genome size for percentage calculations
+  genome_size: null                 # Set to actual genome size (e.g., 16000000)
+
+# Output Configuration
+output:
+  # Export formats for statistical results
+  formats: ["csv", "tsv", "excel"]
+
+  # Plot generation
+  create_plots: true
+  plot_types: ["pie", "bar", "length", "chromosome", "dashboard"]
+
+# Visualization Settings
+visualization:
+  # Matplotlib style
+  style: "seaborn-v0_8"
+
+  # Figure quality settings
+  dpi: 300
+
+  # Output formats for plots
+  figure_formats: ["png", "svg"]
+
+  # Figure size settings (in inches)
+  figure_sizes:
+    pie: [10, 8]
+    bar: [12, 8]
+    length: [12, 8]
+    chromosome: [14, 8]
+    dashboard: [16, 12]
+
+# Color Schemes
+colors:
+  # Level 1 classification colors
+  level1:
+    "Class I": "#1f77b4"      # Blue
+    "Class II": "#ff7f0e"     # Orange
+    "Other": "#2ca02c"        # Green
+
+  # Length distribution bins
+  length_bins:
+    "<100": "#f7fbff"
+    "100-500": "#deebf7"
+    "500-1K": "#c6dbef"
+    "1K-2K": "#9ecae1"
+    "2K-5K": "#6baed6"
+    "5K-10K": "#4292c6"
+    ">10K": "#2171b5"
+
+# Logging Configuration
+logging:
+  level: "INFO"                  # DEBUG, INFO, WARNING, ERROR
+  file: "te_statistics.log"
+  format: "%(asctime)s - %(levelname)s - %(message)s"
+
+# Performance Settings
+performance:
+  # Chunk size for processing large files (number of records)
+  chunk_size: 10000
+
+  # Memory usage optimization
+  optimize_memory: true
+
+  # Parallel processing (not implemented yet)
+  parallel_processing: false
+  num_cores: 4
+
+# Advanced Settings
+advanced:
+  # Custom TE type patterns
+  type_patterns:
+    # Regular expressions for identifying TE types
+    LTR: ".*[Ll][Tt][Rr].*"
+    LINE: ".*[Ll][Ii][Nn][Ee].*"
+    SINE: ".*[Ss][Ii][Nn][Ee].*"
+    DNA: ".*[Dd][Nn][Aa].*"
+
+  # Exclude specific TE types
+  exclude_patterns:
+    - "Satellite"
+    - "Simple_repeat"
+    - "rRNA"
+    - "tRNA"
+    - "snRNA"
+
+  # Merge thresholds for bedtools (bp)
+  merge_threshold: 0
